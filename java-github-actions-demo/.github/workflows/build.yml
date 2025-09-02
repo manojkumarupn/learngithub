@@ -1,0 +1,21 @@
+name: Java CI (Manual Trigger)
+
+on:
+  workflow_dispatch:   # 👈 allows manual trigger from GitHub Actions tab
+
+jobs:
+  build:
+    runs-on: self-hosted   # uses your local runner
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Check Java version
+      run: java -version   # should print Java 24 from your local machine
+
+    - name: Compile Java
+      run: javac src/Main.java -d out
+
+    - name: Run Application
+      run: java -cp out Main
